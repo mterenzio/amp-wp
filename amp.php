@@ -29,11 +29,9 @@ function amp_add_actions() {
 		// TODO: check if post_type supports amp
 		add_action( 'template_redirect', 'amp_template_redirect' );
 	} else {
-		$amp_enabled = get_post_meta($post->ID, 'amp_enabled', true);
-		if( !empty($amp_enabled) && $amp_enabled == false) {
-			return;  
-	    	}
-		add_action( 'wp_head', 'amp_canonical' );
+		if( ! get_post_meta(get_the_ID(), 'amp_enabled', true ) ) {
+			add_action( 'wp_head', 'amp_canonical' );
+		}
 	}
 }
 
